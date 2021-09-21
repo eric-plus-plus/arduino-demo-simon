@@ -148,6 +148,7 @@ void loop() {
         {
           selection = 3;
           digitalWrite(P_LED4, HIGH);
+          break;
         }
       }
       delay(500); // debounce
