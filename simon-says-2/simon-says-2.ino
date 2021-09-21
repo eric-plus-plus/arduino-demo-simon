@@ -27,6 +27,12 @@
 #define P_B2 11
 #define P_B3 10
 #define P_B4 9
+// define animation lengths
+#define TIME_ON 500
+#define TIME_OFF 250
+#define TIME_ANIM 100
+#define TIME_DEBOUNCE 100
+#define TIME_BREAK 1000 // time between new games and turns
 
 // declare functions here so they can be used in
 // loop(). We wait until later to define them.
@@ -70,17 +76,17 @@ void setup() {
 void loop() {
   // new game animation (blink all leds 3 times)
   allOn();
-  delay(100);
+  delay(TIME_ANIM);
   allOff();
-  delay(200);
+  delay(TIME_ANIM);
   allOn();
-  delay(100);
+  delay(TIME_ANIM);
   allOff();
-  delay(200);
+  delay(TIME_ANIM);
   allOn();
-  delay(100);
+  delay(TIME_ANIM);
   allOff();
-  delay(1000);
+  delay(TIME_BREAK);
 
   // start the game
   int moves[100]; // Array to hold the sequence of moves
@@ -112,10 +118,9 @@ void loop() {
           digitalWrite(P_LED4, HIGH);
           break;
       }
-      delay(500);
+      delay(TIME_ON);
       allOff();
-      // wait 0.25 seconds before the next move
-      delay(250);
+      delay(TIME_OFF);
     }
 
     // player's turn to repeat the pattern
@@ -151,7 +156,7 @@ void loop() {
           break;
         }
       }
-      delay(500); // debounce
+      delay(TIME_ON); // debounce
       
       // wait until all buttons are released
       while (!digitalRead(P_B1)
@@ -159,7 +164,7 @@ void loop() {
              && !digitalRead(P_B3)
              && !digitalRead(P_B4)) {}
       allOff();
-      delay(100); // debounce
+      delay(TIME_DEBOUNCE); // debounce
 
       // check to see if the wrong button was pressed
       if (selection != moves[i])
@@ -169,19 +174,19 @@ void loop() {
       }
     }
     // wait a second before showing the next pattern
-    delay(1000);
+    delay(TIME_BREAK);
   }
   // the game has been lost, play game over animation
   oneOn(P_LED1);
-  delay(100);
+  delay(TIME_ANIM);
   oneOn(P_LED2);
-  delay(100);
+  delay(TIME_ANIM);
   oneOn(P_LED3);
-  delay(100);
+  delay(TIME_ANIM);
   oneOn(P_LED4);
-  delay(100);
+  delay(TIME_ANIM);
   allOff();
-  delay(1000);
+  delay(TIME_BREAK);
 }
 
 // turns off all LEDs
