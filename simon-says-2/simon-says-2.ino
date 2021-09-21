@@ -80,7 +80,7 @@ void loop() {
   allOn();
   delay(100);
   allOff();
-  delay(200);
+  delay(1000);
 
   // start the game
   int moves[100]; // Array to hold the sequence of moves
@@ -150,7 +150,7 @@ void loop() {
           digitalWrite(P_LED4, HIGH);
         }
       }
-      delay(100); // debounce
+      delay(500); // debounce
       
       // wait until all buttons are released
       while (!digitalRead(P_B1)
@@ -167,6 +167,8 @@ void loop() {
         break; // exit the for loop
       }
     }
+    // wait a second before showing the next pattern
+    delay(1000);
   }
   // the game has been lost, play game over animation
   oneOn(P_LED1);

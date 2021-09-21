@@ -77,7 +77,7 @@ void loop() {
   digitalWrite(6, LOW);
   digitalWrite(5, LOW);
   digitalWrite(4, LOW);
-  delay(200);
+  delay(1000);
 
   // start the game
   int moves[100]; // Array to hold the sequence of moves
@@ -154,7 +154,7 @@ void loop() {
           digitalWrite(4, HIGH);
         }
       }
-      delay(100); // debounce
+      delay(500); // debounce
       
       // wait for the pressed button to be released
       if (selection == 0)
@@ -187,6 +187,8 @@ void loop() {
         break; // exit the for loop
       }
     }
+    // wait a second before showing the next pattern
+    delay(1000);
   }
   // the game has been lost, play game over animation
   digitalWrite(7, HIGH);
